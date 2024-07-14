@@ -270,16 +270,5 @@
 
 </script>
             
-        function redirectToCheckout(title, posterUrl) {
-            const checkoutUrl = `checkout.html?title=${encodeURIComponent(title)}&poster=${encodeURIComponent(posterUrl)}`;
-            console.log(`Redirecting to: ${checkoutUrl}`);
-            window.location.href = checkoutUrl;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchTrendingMovies();
-            document.getElementById('search-bar').addEventListener('input', handleSearchInput);
-        });
-    </script>
 </body>
 </html>
