@@ -270,18 +270,7 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-            const searchTerm = event.target.value.trim();
-
-            if (searchTerm == '') {
-                fetchTrendingMovies();
-            } else {
-                searchDebounce = setTimeout(() => {
-                    clearMovies();
-                    fetchMovieDetails(searchTerm);
-                }, debounceTimeout);
-            }
-        }
-
+            
         function redirectToCheckout(title, posterUrl) {
             const checkoutUrl = `checkout.html?title=${encodeURIComponent(title)}&poster=${encodeURIComponent(posterUrl)}`;
             console.log(`Redirecting to: ${checkoutUrl}`);
