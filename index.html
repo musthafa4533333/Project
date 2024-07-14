@@ -228,7 +228,7 @@
             document.getElementById('movies-container').appendChild(movieElement);
         }
 
-        function fetchMovieDetails(searchTerm) {
+         function fetchMovieDetails(searchTerm) {
             fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${OMDB_API_KEY}`)
                 .then(response => response.json())
                 .then(data => {
@@ -267,7 +267,28 @@
 
         function handleSearchInput(event) {
             clearTimeout(searchDebounce);
+            const searchTerm = event.target.value.trim();
 
-  </script>         
+            if (searchTerm == '') {
+                fetchTrendingMovies();
+            } else {
+                searchDebounce = setTimeout(() => {
+                    clearMovies();
+                    fetchMovieDetails(searchTerm);
+                }, debounceTimeout);
+            }
+        }
+
+        function redirectToCheckout(title, posterUrl) {
+            const checkoutUrl = `checkout.html?title=${encodeURIComponent(title)}&poster=${encodeURIComponent(posterUrl)}`;
+            console.log(`Redirecting to: ${checkoutUrl}`);
+            window.location.href = checkoutUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchTrendingMovies();
+            document.getElementById('search-bar').addEventListener('input', handleSearchInput);
+        });
+    </script>
 </body>
 </html>
