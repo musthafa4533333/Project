@@ -2,11 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cinemas</title>
-    <meta name="ezoic-site-verification" content="ZSMWh5PyoFRkCP5VwUzfDBWubYCrLy" />
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7494913945325213"
-     crossorigin="anonymous"></script>
+    <title>Your Movies</title>
     <style>
         @import url('https://cdn.jsdelivr.net/npm/pattern.css');
 
@@ -14,6 +10,7 @@
             font-family: Arial, sans-serif;
             background-color: #ffffff
         }
+
         .pattern-background {
             background: repeating-linear-gradient(
                 45deg,
@@ -65,7 +62,7 @@
             transform: scale(1.1);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
- 
+
         .movie-info {
             display: flex;
             flex-direction: column;
@@ -148,43 +145,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<script type="text/javascript" src="//www.topcreativeformat.com/ea2c933c1acf23cd38ea1c9283479d93/invoke.js"></script>
-<script type='text/javascript' src='//pl23785896.highrevenuenetwork.com/cc/77/ad/cc77ad70bedd8fcf4a410b10a2efed8b.js'></script>
-	<script type="text/javascript">
-	atOptions = {
-		'key' : 'ea2c933c1acf23cd38ea1c9283479d93',
-		'format' : 'iframe',
-		'height' : 300,
-		'width' : 160,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/ea2c933c1acf23cd38ea1c9283479d93/invoke.js"></script>
-	<script type='text/javascript' src='//pl23785896.highrevenuenetwork.com/cc/77/ad/cc77ad70bedd8fcf4a410b10a2efed8b.js'></script>
-    <script type="text/javascript">
-	atOptions = {
-		'key' : 'a48effb92788753f613d4d1bab3d05df',
-		'format' : 'iframe',
-		'height' : 60,
-		'width' : 468,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/a48effb92788753f613d4d1bab3d05df/invoke.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7494913945325213"
-     crossorigin="anonymous"></script>
-<!-- hur -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7494913945325213"
-     data-ad-slot="4616762508"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<body class="pattern-background">
     <div id="header">
-        <h1>Your Cinemas</h1>
+        <h1>YourMovies</h1>
     </div>
     <div id="search-bar-container">
         <div id="search-bar-wrapper">
@@ -193,6 +156,7 @@
         </div>
     </div>
     <div id="movies-container"></div>
+
     <script>
         const debounceTimeout = 300;
         let searchDebounce;
@@ -241,7 +205,7 @@
             document.getElementById('movies-container').appendChild(movieElement);
         }
 
-         function fetchMovieDetails(searchTerm) {
+        function fetchMovieDetails(searchTerm) {
             fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${OMDB_API_KEY}`)
                 .then(response => response.json())
                 .then(data => {
@@ -303,13 +267,5 @@
             document.getElementById('search-bar').addEventListener('input', handleSearchInput);
         });
     </script>
-    <amp-ad width="100vw" height="320"
-     type="adsense"
-     data-ad-client="ca-pub-7494913945325213"
-     data-ad-slot="5928886315"
-     data-auto-format="rspv"
-     data-full-width="">
-  <div overflow=""></div>
-</amp-ad>
 </body>
 </html>
