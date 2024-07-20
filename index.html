@@ -1,13 +1,8 @@
 <html>
 <head>
-    <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="207447"></script>
-    <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="207443"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7494913945325213"
-     crossorigin="anonymous"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7494913945325213"
-     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Movies</title>
+    <title>Your Movies</title>
     <style>
         @import url('https://cdn.jsdelivr.net/npm/pattern.css');
 
@@ -151,12 +146,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="pattern-background">
-    <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="207447"></script>
-    <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="207443"></script>
-<script type="text/javascript" src="//www.topcreativeformat.com/ea2c933c1acf23cd38ea1c9283479d93/invoke.js"></script>
-<script type="text/javascript" src="//www.topcreativeformat.com/a48effb92788753f613d4d1bab3d05df/invoke.js"></script>
     <div id="header">
-        <h1>Movies</h1>
+        <h1>YourMovies</h1>
     </div>
     <div id="search-bar-container">
         <div id="search-bar-wrapper">
@@ -174,7 +165,7 @@
         const OMDB_API_KEY = '41b84c2';
 
         function createMovieElement(title, poster) {
-            console.log(Creating movie element for: ${title});
+            console.log(`Creating movie element for: ${title}`);
 
             const movieElement = document.createElement('div');
             movieElement.classList.add('movie');
@@ -195,7 +186,7 @@
             cartButton.addEventListener('click', () => {
                 Swal.fire({
                     title: 'Success!',
-                    html: Added <b>${title}</b> to cart,
+                    html: `Added <b>${title}</b> to cart`,
                     icon: 'success',
                     confirmButtonText: 'Proceed'
                 }).then(() => {
@@ -215,7 +206,7 @@
         }
 
         function fetchMovieDetails(searchTerm) {
-            fetch(https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${OMDB_API_KEY})
+            fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${OMDB_API_KEY}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.Response === 'True') {
@@ -229,14 +220,14 @@
         }
 
         function fetchTrendingMovies() {
-            fetch(https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API_KEY})
+            fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API_KEY}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.results) {
                         clearMovies();
                         data.results.forEach(movie => {
                             const title = movie.title || movie.name;
-                            const posterPath = movie.poster_path ?https://image.tmdb.org/t/p/w500${movie.poster_path}:placeholderImage;
+                            const posterPath = movie.poster_path ?`https://image.tmdb.org/t/p/w500${movie.poster_path}`:placeholderImage;
                             createMovieElement(title, posterPath);
                         });
                     } else {
@@ -266,8 +257,8 @@
         }
 
         function redirectToCheckout(title, posterUrl) {
-            const checkoutUrl = checkout.html?title=${encodeURIComponent(title)}&poster=${encodeURIComponent(posterUrl)};
-            console.log(Redirecting to: ${checkoutUrl});
+            const checkoutUrl = `checkout.html?title=${encodeURIComponent(title)}&poster=${encodeURIComponent(posterUrl)}`;
+            console.log(`Redirecting to: ${checkoutUrl}`);
             window.location.href = checkoutUrl;
         }
 
@@ -275,6 +266,6 @@
             fetchTrendingMovies();
             document.getElementById('search-bar').addEventListener('input', handleSearchInput);
         });
- </script>	
+    </script>
 </body>
 </html>
