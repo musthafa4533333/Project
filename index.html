@@ -148,129 +148,41 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body class="pattern-background">
-<script type="text/javascript" src="//www.topcreativeformat.com/ea2c933c1acf23cd38ea1c9283479d93/invoke.js"></script>
-<script type="text/javascript" src="//www.topcreativeformat.com/a48effb92788753f613d4d1bab3d05df/invoke.js"></script>
-    <div id="header">
-        <h1>Movies</h1>
-    </div>
-    <div id="search-bar-container">
-        <div id="search-bar-wrapper">
-            <input type="text" id="search-bar" placeholder="Search for movies...">
-            <i class="fas fa-search search-icon"></i>
-        </div>
-    </div>
-    <div id="movies-container"></div>
+<body <?php astra_schema_body(); ?> <?php body_class(); ?>>
+<?php astra_body_top(); ?>
+<?php wp_body_open(); ?>
 
-    <script>
-        const debounceTimeout = 300;
-        let searchDebounce;
-        const placeholderImage ='https://via.placeholder.com/150';
-        const TMDB_API_KEY = 'd65eadc037dc441223d81996a5c3b188';
-        const OMDB_API_KEY = '41b84c2';
+<a
+	class="skip-link screen-reader-text"
+	href="#content"
+	role="link"
+	title="<?php echo esc_attr( astra_default_strings( 'string-header-skip-link', false ) ); ?>">
+		<?php echo esc_html( astra_default_strings( 'string-header-skip-link', false ) ); ?>
+</a>
 
-        function createMovieElement(title, poster) {
-            console.log(`Creating movie element for: ${title}`);
+<div
+<?php
+	echo astra_attr(
+		'site',
+		array(
+			'id'    => 'page',
+			'class' => 'hfeed site',
+		)
+	);
+	?>
+>
+	<?php
+	astra_header_before();
 
-            const movieElement = document.createElement('div');
-            movieElement.classList.add('movie');
+	astra_header();
 
-            const posterUrl = (poster !== 'N/A' && poster !== undefined) ? poster : placeholderImage;
+	astra_header_after();
 
-            const posterContainer = document.createElement('div');
-            posterContainer.classList.add('poster-container');
-            posterContainer.innerHTML = `
-                <img src="${posterUrl}" alt="${title}" onerror="this.onerror=null;this.src='${placeholderImage}';">
-            `;
+	astra_content_before();
+	?>
+	<div id="content" class="site-content">
+		<div class="ast-container">
+		<?php astra_content_top(); ?>
 
-            const titleElement = document.createElement('p');
-            titleElement.textContent = title;
-
-            const cartButton = document.createElement('button');
-            cartButton.textContent = 'Add to Cart';
-            cartButton.addEventListener('click', () => {
-                Swal.fire({
-                    title: 'Success!',
-                    html: `Added <b>${title}</b> to cart`,
-                    icon: 'success',
-                    confirmButtonText: 'Proceed'
-                }).then(() => {
-                    redirectToCheckout(title, posterUrl); 
-                });
-            });
-
-            const movieInfo = document.createElement('div');
-            movieInfo.classList.add('movie-info');
-            movieInfo.appendChild(titleElement);
-            movieInfo.appendChild(cartButton);
-
-            movieElement.appendChild(posterContainer);
-            movieElement.appendChild(movieInfo);
-
-            document.getElementById('movies-container').appendChild(movieElement);
-        }
-
-        function fetchMovieDetails(searchTerm) {
-            fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${OMDB_API_KEY}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.Response === 'True') {
-                        clearMovies();
-                        data.Search.forEach(movie => createMovieElement(movie.Title, movie.Poster));
-                    } else {
-                        console.error('No movies found');
-                    }
-                })
-                .catch(error => console.error('Error fetching movie details:', error));
-        }
-
-        function fetchTrendingMovies() {
-            fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API_KEY}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.results) {
-                        clearMovies();
-                        data.results.forEach(movie => {
-                            const title = movie.title || movie.name;
-                            const posterPath = movie.poster_path ?`https://image.tmdb.org/t/p/w500${movie.poster_path}`:placeholderImage;
-                            createMovieElement(title, posterPath);
-                        });
-                    } else {
-                        console.error('No trending movies found');
-                    }
-                })
-                .catch(error => console.error('Error fetching trending movies:', error));
-        }
-
-        function clearMovies() {
-            const container = document.getElementById('movies-container');
-            container.innerHTML = '';
-        }
-
-        function handleSearchInput(event) {
-            clearTimeout(searchDebounce);
-            const searchTerm = event.target.value.trim();
-
-            if (searchTerm == '') {
-                fetchTrendingMovies();
-            } else {
-                searchDebounce = setTimeout(() => {
-                    clearMovies();
-                    fetchMovieDetails(searchTerm);
-                }, debounceTimeout);
-            }
-        }
-
-        function redirectToCheckout(title, posterUrl) {
-            const checkoutUrl = `checkout.html?title=${encodeURIComponent(title)}&poster=${encodeURIComponent(posterUrl)}`;
-            console.log(`Redirecting to: ${checkoutUrl}`);
-            window.location.href = checkoutUrl;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchTrendingMovies();
-            document.getElementById('search-bar').addEventListener('input', handleSearchInput);
-        });
-    </script>
 </body>
 </html>
